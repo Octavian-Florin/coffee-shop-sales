@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: stg_coffee_shop__sales
+    description: "Staging model cleaned for coffee transactions."
+    columns:
+      - name: transaction_id
+        description: "Primary key for transaction."
+        tests:
+          - unique
+          - not_null
+
+      - name: unit_price
+        description: "Unit price for products (numeric format)."
+        tests:
+          - not_null

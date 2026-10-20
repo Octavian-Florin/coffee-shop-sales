@@ -1,0 +1,51 @@
+version: 2
+
+models:
+  - name: dim_products
+    description: "Dimension table containing unique coffee shop products."
+    columns:
+      - name: product_id
+        description: "Primary key for products."
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_stores
+    description: "Dimension table containing unique store locations."
+    columns:
+      - name: store_id
+        description: "Primary key for store locations."
+        tests:
+          - unique
+          - not_null
+
+  - name: fct_sales
+    description: "Fact table containing individual sales transactions and total metrics."
+    columns:
+      - name: transaction_id
+        description: "Primary key for transaction sales."
+        tests:
+          - unique
+          - not_null
+
+      - name: product_id
+        description: "Foreign key referencing dim_products."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_products')
+              field: product_id
+
+  - name: fct_daily_sales
+    description: "Daily aggregated sales metrics per store, including key metrics."
+    columns:
+      - name: transaction_date
+        description: "The date of the sales transactions."
+        tests:
+          - not_null
+      - name: store_id
+        description: "Foreign key referencing the store where sales occurred."
+        tests:
+          - not_null
+      - name: total_revenue
+        description: "Total revenue generated on that date for the specific store."

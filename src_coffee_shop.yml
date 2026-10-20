@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: coffee_shop_raw
+    database: postgres
+    schema: coffee_shop_raw
+    tables: 
+      - name: raw_data
+        description: "Raw data tranzactions imported from CSV."
